@@ -31,6 +31,8 @@ class ImportCategoryUseCase {
                     description,
                 });
             }).on('end', () => {
+                fs.promises.unlink(file.path);
+
                 resolve(categories);
             }).on('error', (err) => {
                 reject(err);
