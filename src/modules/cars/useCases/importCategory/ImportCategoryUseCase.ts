@@ -1,13 +1,18 @@
-import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
-import { Category } from '../../model/Category';
+import fs from 'fs';
+import csvParse from 'csv-parse';
 
 class ImportCategoryUseCase {
-    constructor(private categoriesRepository: ICategoriesRepository) {}
 
-    execute(file: any): Category[] {
-        const categories = this.categoriesRepository.list();
+    execute(file: Express.Multer.File): void {
+        const stream = fs.createReadStream(file.path);
 
-        return categories;
+        const parserFile = csvParse();
+
+        stream.pipe(parserFile);
+
+        parserFile.on('data', async (line) => {
+            console.log(line);
+        })
     }
 }
 
