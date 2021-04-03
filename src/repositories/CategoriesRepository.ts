@@ -1,5 +1,9 @@
 import { Category } from '../model/Category';
 
+interface ICreateCategoryDTO {
+    name: string;
+    description: string;
+}
 class CategoriesRepository {
     private categories: Category[];
 
@@ -7,7 +11,7 @@ class CategoriesRepository {
         this.categories = [];
     }
 
-    create() {
+    create({ name, description }: ICreateCategoryDTO ): void {
         const category = new Category();
 
         Object.assign(category, {
