@@ -1,10 +1,10 @@
 import { CreateSpecificationUseCase } from './CreateSpecificationUseCase';
-import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
+import { SpecificationsRepository } from '../../repositories/implementations/SpecificationsRepository';
 import { CreateSpecificationController } from './CreateSpecificationController';
 
-const categoriesRepository = CategoriesRepository.getInstance();
-const createCategoryUseCase = new CreateSpecificationUseCase(categoriesRepository);
+const specificationsRepository = SpecificationsRepository.getInstance();
+const createSpecificationUseCase = new CreateSpecificationUseCase(specificationsRepository);
 
-const createCategoryController = new CreateSpecificationController(createCategoryUseCase);
+const createSpecificationController = new CreateSpecificationController(createSpecificationUseCase);
 
-export { createCategoryController }
+export { createSpecificationController }
