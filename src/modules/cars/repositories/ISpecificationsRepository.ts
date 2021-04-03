@@ -1,14 +1,11 @@
-import { Category } from '../model/Category';
 
-interface ICreateCategoryDTO {
+interface ICreateSpecificationDTO {
     name: string;
     description: string;
 }
 
 interface ISpecificationsRepository {
-    create({ name, description }: ICreateCategoryDTO): void;
-    list(): Category[];
-    findbyName(name: string): Category;
+    create({ name, description }: ICreateSpecificationDTO): void;
 }
 
-export { ISpecificationsRepository, ICreateCategoryDTO };
+export { ISpecificationsRepository, ICreateSpecificationDTO };
