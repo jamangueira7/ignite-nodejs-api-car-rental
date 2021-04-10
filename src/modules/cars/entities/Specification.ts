@@ -6,7 +6,9 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity("specifications")
+@Entity("specifications", {
+    synchronize: false
+})
 class Specification {
     @PrimaryColumn()
     id?: string;

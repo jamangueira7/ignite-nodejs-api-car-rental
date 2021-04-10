@@ -4,10 +4,10 @@ interface IOptions {
     host: string;
 }
 
-getConnectionOptions().then(options => {
+getConnectionOptions().then(async (options) => {
     const newOptions = options as IOptions;
-    newOptions.host = 'database_ignite'; //Essa opção deverá ser EXATAMENTE o nome dado ao service do banco de dados
-    createConnection({
+    newOptions.host = 'database_ignite';
+    await createConnection({
         ...options,
     });
 });

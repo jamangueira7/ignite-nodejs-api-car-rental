@@ -7,7 +7,9 @@ import {
 
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity("users")
+@Entity("users", {
+    synchronize: false
+})
 class User {
     @PrimaryColumn()
     id?: string;
