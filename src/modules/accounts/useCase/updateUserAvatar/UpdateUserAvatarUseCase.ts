@@ -1,9 +1,7 @@
 import { inject, injectable } from 'tsyringe';
-import { hash } from 'bcryptjs';
 
-import { AppError } from '../../../../errors/AppError';
+import { deleteFile } from '../../../../utils/file';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 
 interface IRequest {
     user_id: string;
@@ -20,6 +18,10 @@ class UpdateUserAvatarUseCase {
 
     async execute({ user_id, avatar_file }: IRequest): Promise<void> {
         const user = await this.usersRepository.findById(user_id);
+
+        if(user.avatar) {
+            await deleteFile(`./tmp/avatar/${user.avatar}`);
+        }
 
         user.avatar = avatar_file;
 
