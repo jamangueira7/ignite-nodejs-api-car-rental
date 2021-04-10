@@ -5,4 +5,4 @@ interface IUsersRepository {
     create(data: ICreateUserDTO): Promise<void>;
 }
 
-export { IUsersRepository, ICreateUserDTO };
+export { IUsersRepository };
