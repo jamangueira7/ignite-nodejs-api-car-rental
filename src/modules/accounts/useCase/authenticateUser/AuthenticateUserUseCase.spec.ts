@@ -32,6 +32,14 @@ describe("Authenticate User", () => {
         });
 
         expect(result).toHaveProperty("token");
+    });
 
+    it("should not be able to authenticante a none existing user", async () => {
+        expect(async () => {
+            const result = await authenticateUserUseCase.execute({
+                email: 'user@test.com',
+                password: '1234',
+            });
+        }).rejects.toBeInstanceOf(AppError);
     });
 });
