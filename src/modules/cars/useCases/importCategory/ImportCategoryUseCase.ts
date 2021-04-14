@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import fs from 'fs';
 import csvParse from 'csv-parse';
