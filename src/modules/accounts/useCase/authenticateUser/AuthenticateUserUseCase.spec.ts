@@ -1,52 +1,37 @@
 import { AppError } from '../../../../errors/AppError';
-import { CreateCategoryUseCase } from './CreateCategoryUseCase';
-import { CategoriesRepositoryInmemory } from '../../repositories/in-memory/CategoriesRepositoryInmemory';
+import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
+import { UserRepositoryInMemory } from '../../repositories/in-memory/UserRepositoryInMemory';
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 
-let createCategoryUseCase: CreateCategoryUseCase;
-let categoryRepositoryInMemory: CategoriesRepositoryInmemory;
+let createUserUseCase: CreateUserUseCase;
+let authenticateUserUseCase: AuthenticateUserUseCase;
+let userRepositoryInMemory: UserRepositoryInMemory;
 
-describe("Create Category", () => {
+describe("Authenticate User", () => {
 
     beforeEach(() => {
-        categoryRepositoryInMemory = new CategoriesRepositoryInmemory();
-        createCategoryUseCase = new CreateCategoryUseCase(categoryRepositoryInMemory);
+        userRepositoryInMemory = new UserRepositoryInMemory();
+        authenticateUserUseCase = new AuthenticateUserUseCase(userRepositoryInMemory);
+        createUserUseCase = new CreateUserUseCase(userRepositoryInMemory);
     });
 
-    it("should be able to create a new category", async () => {
-        const category = {
-            name: 'Category test',
-            description: 'Category description',
+    it("should be able to authenticante an user", async () => {
+        const user: ICreateUserDTO = {
+            driver_license: '00025',
+            email: 'user@test.com',
+            password: '1234',
+            name: 'User test',
         };
 
-        await createCategoryUseCase.execute({
-            name: category.name,
-            description: category.description,
+        await createUserUseCase.execute(user);
+
+        const result = await authenticateUserUseCase.execute({
+            email: user.email,
+            password: user.password,
         });
 
-        const result = await categoryRepositoryInMemory.findByName(category.name);
-
-        expect(result).toHaveProperty("id");
-
-    });
-
-    it("should not be able to create a new category with name exist", async () => {
-
-        expect(async () => {
-            const category = {
-                name: 'Category test',
-                description: 'Category description',
-            };
-
-            await createCategoryUseCase.execute({
-                name: category.name,
-                description: category.description,
-            });
-
-            await createCategoryUseCase.execute({
-                name: category.name,
-                description: category.description,
-            });
-        }).rejects.toBeInstanceOf(AppError)
+        expect(result).toHaveProperty("token");
 
     });
 });
