@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, TableColumn } from "typeorm";
+import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm';
 
 export class CreateAlterUsersDeleteUsername1618066427536 implements MigrationInterface {
 
