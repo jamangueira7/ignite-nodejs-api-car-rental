@@ -2,9 +2,14 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
+    ManyToOne,
     PrimaryColumn
 } from 'typeorm';
+
 import { v4 as uuidV4 } from 'uuid';
+
+import { Category } from '@modules/cars/infra/typeorm/entities/Category';
 
 @Entity("cars", {
     synchronize: false
@@ -32,10 +37,11 @@ class Car {
     fine_amount: number;
 
     @Column()
-    category_id: string;
-
-    @Column()
     brand: string;
+
+    @ManyToOne(() => Category)
+    @JoinColumn({ name: "category_id"})
+    category: Category;
 
     @CreateDateColumn()
     created_at: Date;
