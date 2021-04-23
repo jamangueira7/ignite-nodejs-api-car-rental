@@ -40,8 +40,11 @@ class Car {
     brand: string;
 
     @ManyToOne(() => Category)
-    @JoinColumn({ name: "category_id"})
+    @JoinColumn({ name: "category_id" })
     category: Category;
+
+    @Column()
+    category_id: string;
 
     @CreateDateColumn()
     created_at: Date;
