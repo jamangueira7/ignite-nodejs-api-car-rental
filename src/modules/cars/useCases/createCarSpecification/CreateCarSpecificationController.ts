@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateCarUseCase } from '@modules/cars/useCases/createCarSpecification/CreateCarSpecificationUseCase';
 
-class CreateCarController {
+class CreateCarSpecificationController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { name, description, daily_rate, license_plate, fine_amount, brand, category_id } = request.body;
@@ -24,4 +24,4 @@ class CreateCarController {
     }
 }
 
-export { CreateCarController };
+export { CreateCarSpecificationController };

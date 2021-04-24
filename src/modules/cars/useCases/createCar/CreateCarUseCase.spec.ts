@@ -1,5 +1,5 @@
 import { AppError } from '@shared/errors/AppError';
-import { CreateCarUseCase } from '@modules/cars/useCases/createCar/CreateCarUseCase';
+import { CreateCarUseCase } from '@modules/cars/useCases/createCarSpecification/CreateCarSpecificationUseCase';
 import { CarsRepositoryInmemory } from '@modules/cars/repositories/in-memory/CarsRepositoryInmemory';
 
 let createCarUseCase: CreateCarUseCase;
