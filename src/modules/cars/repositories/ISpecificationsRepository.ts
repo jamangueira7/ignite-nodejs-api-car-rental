@@ -1,4 +1,4 @@
-import { Category } from '@modules/cars/infra/typeorm/entities/Category';
+import { Specification } from '@modules/cars/infra/typeorm/entities/Specification';
 
 interface ICreateSpecificationDTO {
     name: string;
@@ -7,7 +7,8 @@ interface ICreateSpecificationDTO {
 
 interface ISpecificationsRepository {
     create({ name, description }: ICreateSpecificationDTO): Promise<void>;
-    findbyName(name: string): Promise<Category>;
+    findByName(name: string): Promise<Specification>;
+    findByIds(ids: string[]): Promise<Specification[]>;
 }
 
 export { ISpecificationsRepository, ICreateSpecificationDTO };

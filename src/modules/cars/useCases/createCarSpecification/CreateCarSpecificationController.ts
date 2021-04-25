@@ -1,23 +1,18 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { CreateCarUseCase } from '@modules/cars/useCases/createCarSpecification/CreateCarSpecificationUseCase';
+import { CreateCarSpecificationUseCase } from '@modules/cars/useCases/createCarSpecification/CreateCarSpecificationUseCase';
 
 class CreateCarSpecificationController {
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { name, description, daily_rate, license_plate, fine_amount, brand, category_id } = request.body;
+        const { car_id, specification_id } = request.query;
 
-        const createCarUseCase = container.resolve(CreateCarUseCase);
+        const createCarSpecificationUseCase = container.resolve(CreateCarSpecificationUseCase);
 
-        const car = await createCarUseCase.execute({
-            name,
-            description,
-            daily_rate,
-            license_plate,
-            fine_amount,
-            brand,
-            category_id,
+        const car = await createCarSpecificationUseCase.execute({
+            car_id,
+            specification_id,
         });
 
         return response.status(201).json(car);
