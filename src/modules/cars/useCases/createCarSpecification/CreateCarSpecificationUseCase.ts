@@ -21,11 +21,11 @@ class CreateCarSpecificationUseCase {
         private specificationsRepository: ISpecificationsRepository
     ) {}
 
-    async execute({ car_id, specification_id }: IRequest): Promise<void> {
+    async execute({ car_id, specification_id }: IRequest): Promise<Car> {
 
-        const carAlreadyExists = await this.carsRepository.findById(car_id);
+        const carExists = await this.carsRepository.findById(car_id);
 
-        if(carAlreadyExists) {
+        if(!carExists) {
             throw new AppError('Car already exists!');
         }
 
@@ -33,9 +33,11 @@ class CreateCarSpecificationUseCase {
             specification_id
         );
 
-        carAlreadyExists.specifications = specifications;
+        carExists.specifications = specifications;
 
-        await this.carsRepository.create(carAlreadyExists);
+        await this.carsRepository.create(carExists);
+
+        return carExists;
 
     }
 }
