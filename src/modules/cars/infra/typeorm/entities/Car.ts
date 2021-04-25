@@ -13,9 +13,7 @@ import { v4 as uuidV4 } from 'uuid';
 import { Category } from '@modules/cars/infra/typeorm/entities/Category';
 import {Specification} from "@modules/cars/infra/typeorm/entities/Specification";
 
-@Entity("cars", {
-    synchronize: false
-})
+@Entity("cars")
 class Car {
     @PrimaryColumn()
     id?: string;

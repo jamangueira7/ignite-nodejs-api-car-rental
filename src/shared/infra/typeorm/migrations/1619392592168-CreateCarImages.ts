@@ -1,19 +1,24 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateSpeciticationsCars1619220740564 implements MigrationInterface {
+export class CreateCarImages1619392592168 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "specifications_cars",
+                name: "cars_image",
                 columns: [
                     {
-                        name: "car_id",
-                        type: "uuid"
+                        name: "id",
+                        type: "uuid",
+                        isPrimary: true
                     },
                     {
-                        name: "specification_id",
+                        name: "car_id",
                         type: "uuid",
+                    },
+                    {
+                        name: "image_name",
+                        type: "varchar",
                     },
                     {
                         name: "created_at",
@@ -23,18 +28,10 @@ export class CreateSpeciticationsCars1619220740564 implements MigrationInterface
                 ],
                 foreignKeys: [
                     {
-                        name: "FKCarSpecification",
+                        name: "FKCarImage",
                         referencedTableName: "cars",
                         referencedColumnNames: ["id"],
                         columnNames: ["car_id"],
-                        onDelete: "SET NULL",
-                        onUpdate: "SET NULL"
-                    },
-                    {
-                        name: "FKSpecificationCar",
-                        referencedTableName: "specifications",
-                        referencedColumnNames: ["id"],
-                        columnNames: ["specification_id"],
                         onDelete: "SET NULL",
                         onUpdate: "SET NULL"
                     }
@@ -44,7 +41,7 @@ export class CreateSpeciticationsCars1619220740564 implements MigrationInterface
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("specifications_cars");
+        await queryRunner.dropTable("cars_image");
     }
 
 }
