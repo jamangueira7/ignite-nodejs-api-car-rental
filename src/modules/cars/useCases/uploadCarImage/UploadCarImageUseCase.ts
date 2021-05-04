@@ -1,47 +1,28 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 
-import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
-import { Car } from '@modules/cars/infra/typeorm/entities/Car';
+import { ICarsImageRepository } from '@modules/cars/repositories/ICarsImageRepository';
+import { CarImage } from '@modules/cars/infra/typeorm/entities/CarImage';
 
 import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
-    name: string;
-    description: string;
-    daily_rate: number;
-    license_plate: string;
-    fine_amount: number;
-    brand: string;
-    category_id: string;
+    car_id: string;
+    images_name: string[];
 }
 
 @injectable()
 class UploadCarImageUseCase {
     constructor(
-        @inject("CarsRepository")
-        private carsRepository: ICarsRepository
+        @inject("CarsImageRepository")
+        private carsImageRepository: ICarsImageRepository
     ) {}
 
-    async execute({ name, description, daily_rate, license_plate, fine_amount, brand, category_id }: IRequest): Promise<Car> {
+    async execute({ car_id, images_name }: IRequest): Promise<void> {
 
-        const carAlreadyExists = await this.carsRepository.findByLicensePlate(license_plate);
-
-        if(carAlreadyExists) {
-            throw new AppError('Car already exists!');
-        }
-
-        const car = await this.carsRepository.create({
-            name,
-            description,
-            daily_rate,
-            license_plate,
-            fine_amount,
-            brand,
-            category_id,
+        images_name.map(async image => {
+            await this.carsImageRepository.create(car_id, image);
         });
-
-        return car;
     }
 }
 
