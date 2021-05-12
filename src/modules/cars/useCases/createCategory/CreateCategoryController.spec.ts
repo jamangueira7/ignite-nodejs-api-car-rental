@@ -1,19 +1,10 @@
-import { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import request from 'supertest';
 
-import { CreateCategoryUseCase } from '@modules/cars/useCases/createCategory/CreateCategoryUseCase';
+import { app } from '@shared/infra/http/app';
 
-class CreateCategoryController {
+describe("Create Category Controller", async () => {
+    it("Test", async () => {
+        await request(app);
+    });
 
-    async handle(request: Request, response: Response): Promise<Response> {
-        const { name, description } = request.body;
-
-        const createCategoryUseCase = container.resolve(CreateCategoryUseCase);
-
-        await createCategoryUseCase.execute({ name, description });
-
-        return response.status(201).send();
-    }
-}
-
-export { CreateCategoryController };
+});
