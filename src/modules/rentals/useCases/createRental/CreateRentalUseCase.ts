@@ -1,9 +1,10 @@
+import 'reflect-metadata'
 import { AppError } from '@shared/errors/AppError';
 
 import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
 import { IDateProvider } from '@shared/container/providers/DateProvide/IDateProvider';
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
-import {inject, injectable} from "tsyringe";
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
     user_id: string;
