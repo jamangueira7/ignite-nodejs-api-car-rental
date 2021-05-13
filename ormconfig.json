@@ -9,6 +9,5 @@
   "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
   "cli": {
     "migrationsDir": "./src/shared/infra/typeorm/migrations"
-  },
-  "synchronize": true
+  }
 }

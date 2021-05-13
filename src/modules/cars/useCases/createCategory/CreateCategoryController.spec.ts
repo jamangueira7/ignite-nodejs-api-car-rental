@@ -14,7 +14,9 @@ describe("Create Category Controller", () => {
 
     beforeAll(async () => {
         connection = await createConnection();
+        console.log("1#############")
         await connection.runMigrations();
+        console.log("2#############")
 
         const id = uuidv4();
         const password = await hash("admin", 8);
@@ -27,7 +29,7 @@ describe("Create Category Controller", () => {
     });
 
     afterAll(async () => {
-        //await connection.dropDatabase();
+        await connection.dropDatabase();
         await connection.close();
     });
 

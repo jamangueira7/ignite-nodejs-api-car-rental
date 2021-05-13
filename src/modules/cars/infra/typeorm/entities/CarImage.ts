@@ -2,10 +2,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
-    ManyToOne,
     PrimaryColumn,
-    ManyToMany, JoinTable,
 } from 'typeorm';
 
 import { v4 as uuidV4 } from 'uuid';

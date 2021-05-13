@@ -11,7 +11,7 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 
 import { Category } from '@modules/cars/infra/typeorm/entities/Category';
-import {Specification} from "@modules/cars/infra/typeorm/entities/Specification";
+import { Specification } from '@modules/cars/infra/typeorm/entities/Specification';
 
 @Entity("cars")
 class Car {
