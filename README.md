@@ -356,6 +356,133 @@ Envia:
 }
 ```
 
+- **`POST /rentals`**: Rota para alugar os carros.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Envia:
+
+```
+{
+    "car_id": "346fd9d5-e215-4326-a1f7-4c2261af8bb6"
+    "expected_return_date": "2021-02-03"
+}
+```
+
+- **`POST /cars/specifications/:id`**: Rota para cadastrar especificações de um carro.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Envia:
+
+```
+{
+    "specification_id": "7203114e-b719-4629-b437-f337122c0178"
+}
+```
+
+Retorna:
+
+```
+{
+    "id": "346fd9d5-e215-4326-a1f7-4c2261af8bb6",
+    "available": true,
+    "name": "Gol",
+    "description": "Carro de boy3",
+    "daily_rate": 105,
+    "license_plate": "ACB-1532",
+    "fine_amount": 60,
+    "brand": "Ford",
+    "category_id": "4669a11f-82dc-442f-bc66-adce938478ed",
+    "created_at": "2021-06-01T20:19:58.816Z",
+    "specifications": [
+        {
+            "id": "7203114e-b719-4629-b437-f337122c0178",
+            "name": "Câmbio automático ee",
+            "description": "Carro de rico",
+            "created_at": "2021-06-01T20:18:28.778Z"
+        }
+    ]
+}
+```
+
+- **`POST /cars/specifications/:id`**: Rota para cadastrar especificações de um carro.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Envia:
+
+```
+{
+    "specification_id": "7203114e-b719-4629-b437-f337122c0178"
+}
+```
+
+Retorna:
+
+```
+{
+    "id": "346fd9d5-e215-4326-a1f7-4c2261af8bb6",
+    "available": true,
+    "name": "Gol",
+    "description": "Carro de boy3",
+    "daily_rate": 105,
+    "license_plate": "ACB-1532",
+    "fine_amount": 60,
+    "brand": "Ford",
+    "category_id": "4669a11f-82dc-442f-bc66-adce938478ed",
+    "created_at": "2021-06-01T20:19:58.816Z",
+    "specifications": [
+        {
+            "id": "7203114e-b719-4629-b437-f337122c0178",
+            "name": "Câmbio automático ee",
+            "description": "Carro de rico",
+            "created_at": "2021-06-01T20:18:28.778Z"
+        }
+    ]
+}
+```
+
+- **`POST /cars/images/:id`**: Rota para cadastrar especificações de um carro.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Envia:
+
+```
+{
+    "images": [
+        "image1.png",
+        "image2.png"
+    ]
+}
+```
+
+
 ## 🤔 Como contribuir
 
 - Faça um fork desse repositório;
