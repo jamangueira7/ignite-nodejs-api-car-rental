@@ -27,7 +27,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 API para locação de carros.
 
-### Cadastro de carro
+Lista de requisitos:
+
+##### Cadastro de carro
 
 **RF**
 
@@ -39,7 +41,7 @@ API para locação de carros.
 - O carro deve ser cadastrado, por padrão, com disponibilidade.
 - O usuário responsável pelo cadastro deve ser um usuário administrador.
 
-### Listagem de carros
+##### Listagem de carros
 **RF**
 
 - Deve ser possível listar todos os carros disponíveis.
@@ -50,7 +52,7 @@ API para locação de carros.
 
 - O usuário não precisar estar logado no sistema.
 
-### Cadastro de Especificação no carro
+##### Cadastro de Especificação no carro
 
 **RF**
 
@@ -62,7 +64,7 @@ API para locação de carros.
 - Não deve ser possível cadastrar uma especificação já - existente para o mesmo carro.
 - O usuário responsável pelo cadastro deve ser um usuário - administrador.
 
-### Cadastro de imagens do carro
+##### Cadastro de imagens do carro
 
 **RF**
 
@@ -77,7 +79,7 @@ API para locação de carros.
 - O usuário deve poder cadastrar mais de uma imagem para o - mesmo carro.
 - O usuário responsável pelo cadastro deve ser um usuário - administrador.
 
-### Alugel de carro
+##### Alugel de carro
 
 **RF**
 
@@ -91,7 +93,7 @@ API para locação de carros.
 - O usuário deve estar logado na aplicação.
 - Ao realizar um aluguel, o status do carro deverá ser - alterado para indisponível.
 
-### Devolução de carro
+##### Devolução de carro
 
 **RF**
 
@@ -107,7 +109,7 @@ API para locação de carros.
 - Caso haja multa, deverá ser somado ao total do aluguel.
 - O usuário deve estar logado na aplicação.
 
-### Listagem de Alugueis para usuário
+##### Listagem de Alugueis para usuário
 
 **RF**
 
@@ -117,7 +119,7 @@ API para locação de carros.
 
 - O usuário deve estar logado na aplicação.
 
-### Recuperar Senha
+##### Recuperar Senha
 
 **RF**
 
@@ -140,8 +142,11 @@ Teste:
 
 - Clone o projeto.
 - Entre na pasta do projeto e rode "yarn install" (pode usar npm install de acordo com a sua configuração).
+- Rode o comando docker run --name gostack_postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+- Crei os bancos rentx e rentxtest.
+- Para subir o container do projeto e do banco rode "docker-compose up".
+- "yarn typeorm migration:run" para rodar as migrations.
 - "yarn test" para rodar os testes.
-- yarn run dev para rodar o projeto (localhost:3333).
 
 ## 👩🏿‍💻 Rotas
 
@@ -150,136 +155,204 @@ Teste:
 Enviar:
 ```
 {
-    "name": "João",
-    "username": "joao"
+    "name": "Joao",
+    "email": "joao4@joao.com",
+    "password": "123456",
+    "driver_license": "123456"
 }
 ```
-Retorna:
-```
-{
-    "id": "bc57f695-ae37-48cf-9401-d8aa1f4fd914",
-    "name": "João",
-    "username": "joao",
-    "todos": []
-}
-```
-- **`POST /todos`**: Rota para cadastrar tarefas dos ususarios.
 
-Enviar headers:
-```
-{
-    "username": "joao"
-}
-```
+- **`POST /sessions`**: Rota para se logar
 
 Enviar:
 ```
 {
-    "title": "Sei la",
-    "deadline": "2021-03-31"
+    "email": "joao4@joao.com",
+    "password": "123456"
 }
 ```
 
 Retorna:
 ```
 {
-    "id": "12c44b61-61f8-4ab8-9365-49f107f1796f",
-    "title": "Sei la",
-    "deadline": "2021-03-31T00:00:00.000Z",
-    "done": false,
-    "created_at": "2021-04-01T01:50:51.046Z"
+    "user": {
+        "name": "Joao",
+        "email": "joao4@joao.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
 }
 ```
-- **`GET /todos`**: Rota para buscar todas as tarefas de um usuario.
+
+- **`POST /categories`**: Rota para cadastrar categorias.
 
 Enviar headers:
+
 ```
 {
-    "username": "joao"
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
 }
 ```
 
 Retorna:
+
+```
+{
+    "name": "Unu",
+    "description": "Category2"
+}
+```
+
+- **`POST /specifications`**: Rota para cadastrar especificações.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Enviar:
+
+```
+{
+    "name": "Câmbio automático ee",
+    "description": "Carro de rico"
+}
+```
+
+- **`POST /cars`**: Rota para cadastrar carros.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Envia:
+
+```
+{
+    "name": "Gol",
+    "description": "Carro de boy3",
+    "daily_rate": 105,
+    "license_plate": "ACB-1532",
+    "fine_amount": 60,
+    "brand": "Ford",
+    "category_id": "4669a11f-82dc-442f-bc66-adce938478ed"
+}
+```
+
+Retorna:
+
+```
+{
+    "id": "346fd9d5-e215-4326-a1f7-4c2261af8bb6",
+    "available": true,
+    "name": "Gol",
+    "description": "Carro de boy3",
+    "daily_rate": 105,
+    "license_plate": "ACB-1532",
+    "fine_amount": 60,
+    "brand": "Ford",
+    "category_id": "4669a11f-82dc-442f-bc66-adce938478ed",
+    "created_at": "2021-06-01T20:19:58.816Z"
+}
+```
+
+- **`POST /categories/import`**: Rota para cadastrar caterias pelos arquivos.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Envia:
+
+```
+{
+    "file": "1615818549022-attachment.csv"
+}
+```
+
+- **`GET /categories`**: Rota para listar categorias.
+
+Enviar headers:
+
+```
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Retorna:
+
 ```
 [
     {
-        "id": "12c44b61-61f8-4ab8-9365-49f107f1796f",
-        "title": "Sei la",
-        "deadline": "2021-03-31T00:00:00.000Z",
-        "done": false,
-        "created_at": "2021-04-01T01:50:51.046Z"
+        "id": "8b899d19-4cc7-4fd7-827c-6feaef47ad74",
+        "name": "Category Supertest name",
+        "description": "Category Supertest description",
+        "created_at": "2021-05-12T23:44:41.784Z"
     },
     {
-        "id": "47d9dbfa-5095-4465-85c6-9cb513c9c720",
-        "title": "Sei la 2",
-        "deadline": "2021-03-31T00:00:00.000Z",
-        "done": false,
-        "created_at": "2021-04-01T01:51:34.911Z"
-    },
-    {
-        "id": "db9f09c6-d788-492c-ab23-59ed99ef1340",
-        "title": "Sei la 3",
-        "deadline": "2021-03-31T00:00:00.000Z",
-        "done": false,
-        "created_at": "2021-04-01T01:51:38.452Z"
+        "id": "4669a11f-82dc-442f-bc66-adce938478ed",
+        "name": "Unu",
+        "description": "Category2",
+        "created_at": "2021-06-01T20:14:10.588Z"
     }
 ]
 ```
 
-- **`PUT /todos/:id`**: Rota para alterar uma tarefa de um ususario.
+- **`GET /cars/available`**: Rota para listar carros disponivel.
 
 Enviar headers:
-```
-{
-    "username": "joao"
-}
-```
 
-Enviar:
 ```
 {
-    "title": "Sei la alterado",
-    "deadline": "2021-04-02"
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
 }
 ```
 
 Retorna:
+
 ```
-{
-    "id": "12c44b61-61f8-4ab8-9365-49f107f1796f",
-    "title": "Sei la alterado",
-    "deadline": "2021-04-02",
-    "done": false,
-    "created_at": "2021-04-01T01:50:51.046Z"
-}
+[
+    {
+        "id": "346fd9d5-e215-4326-a1f7-4c2261af8bb6",
+        "available": true,
+        "name": "Gol",
+        "description": "Carro de boy3",
+        "daily_rate": 105,
+        "license_plate": "ACB-1532",
+        "fine_amount": 60,
+        "brand": "Ford",
+        "category_id": "4669a11f-82dc-442f-bc66-adce938478ed",
+        "created_at": "2021-06-01T20:19:58.816Z"
+    }
+]
 ```
 
-- **`PATCH /todos/:id/done`**: Rota para alterar o campo done de uma tarefa de um ususario.
-
-Enviar headers:
-```
-{
-    "username": "joao"
-}
-```
-
-Retorna:
-```
-{
-    "id": "12c44b61-61f8-4ab8-9365-49f107f1796f",
-    "title": "Sei la alterado",
-    "deadline": "2021-04-02",
-    "done": true,
-    "created_at": "2021-04-01T01:50:51.046Z"
-}
-```
-
-- **`DELETE /todos/:id`**: Rota para deletar uma tarefa de um ususario.
+- **`PATCH /users/avatar`**: Rota para cadastrar imagens dos carros.
 
 Enviar headers:
+
 ```
 {
-    "username": "joao"
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjI1NzgzMDYsImV4cCI6MTYyMjY2NDcwNiwic3ViIjoiMTQwMGE1ODEtMWRlOS00MzIyLWI4ZTktNzgxNGVjZjU3YjE5In0.-aZs3N1GD4BILCkBtGMm_L_7Gf1JICaqdoE18x-RhJc"
+}
+```
+
+Envia:
+
+```
+{
+    "avatar": "image.jpg"
 }
 ```
 
