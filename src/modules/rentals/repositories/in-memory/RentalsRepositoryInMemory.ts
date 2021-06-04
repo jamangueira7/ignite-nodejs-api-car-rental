@@ -29,6 +29,10 @@ class RentalsRepositoryInMemory implements IRentalsRepository {
 
         return rental;
     }
+
+    findById(id: string): Promise<Rental> {
+        return Promise.resolve(undefined);
+    }
 }
 
 export { RentalsRepositoryInMemory };
