@@ -11,7 +11,7 @@ let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
 let carsRepositoryInmemory: CarsRepositoryInmemory;
 let dayJsProvider: DayjsDateProvider;
 
-describe('Create Rental', () => {
+/*describe('Create Rental', () => {
 
     const dayAdd24Hours = dayjs().add(1, 'day').toDate()
 
@@ -79,4 +79,4 @@ describe('Create Rental', () => {
             });
         }).rejects.toBeInstanceOf(AppError);
     });
-})
+})*/

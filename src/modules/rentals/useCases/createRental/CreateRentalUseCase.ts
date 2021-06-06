@@ -28,6 +28,7 @@ class CreateRentalUseCase {
 
     async execute({ user_id, car_id, expected_return_date }: IRequest): Promise<Rental>{
 
+
         const minimumHours = 24;
         const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(car_id);
 
@@ -42,8 +43,8 @@ class CreateRentalUseCase {
         }
 
         const dateNow = this.dateProvider.dateNow();
-        const compare = this.dateProvider.compareInHours(dateNow, expected_return_date);
 
+        const compare = this.dateProvider.compareInHours(dateNow, expected_return_date);
         if(compare < minimumHours) {
             throw new AppError("Invalid return time.");
         }

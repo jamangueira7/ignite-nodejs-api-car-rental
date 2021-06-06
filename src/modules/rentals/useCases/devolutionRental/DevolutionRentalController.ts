@@ -6,18 +6,18 @@ import { DevolutionRentalUseCase } from '@modules/rentals/useCases/devolutionRen
 class DevolutionRentalController {
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { car_id, expected_return_date } = request.body;
-        const { id } = request.user;
 
-        const createRentalUseCase = container.resolve(DevolutionRentalUseCase);
+        const { id  } = request.params;
+        const { id: user_id } = request.user;
 
-        const rental = await createRentalUseCase.execute({
-           car_id,
-           user_id: id,
-           expected_return_date,
+        const devolutionRentalUseCase = container.resolve(DevolutionRentalUseCase);
+
+        const rental = await devolutionRentalUseCase.execute({
+            id,
+           user_id,
         });
 
-        return response.status(201).json(rental);
+        return response.status(200).json(rental);
     }
 }
 
